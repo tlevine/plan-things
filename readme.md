@@ -57,15 +57,15 @@ The plans directory is structured like so.
       .cache
       proposed/
         plan_trip/
-          thing.yml
-          book_flight.yml
-          call_bob.yml
+          thing.sh
+          book_flight.sh
+          call_bob.sh
         ...
       current/
         make_a_cardboard_comma/
-          thing.yml
-          buy_glue.yml
-          find_cardboard.yml
+          thing.sh
+          buy_glue.sh
+          find_cardboard.sh
         ...
       passed/
         ...
@@ -85,9 +85,9 @@ The `~/.plans` directory contais two other files,
 `.cache\n`, and `.cache` is a cache file.
 
 ### Things
-Each thing directory contains a file called `thing.yml`.
+Each thing directory contains a file called `thing.sh`.
 This file has most of the thing-specific information.
-All of the other files are tasks, named `${task_name}.yml`,
+All of the other files are tasks, named `${task_name}.sh`,
 and they contain the task-specific information.
 
 The one piece of information that is not encoded in the
@@ -101,3 +101,8 @@ directories. They can only be moved to the "done"
 directory/group from the "current" group, and this happens
 when all of the tasks have been marked "done", with
 `plan edit thing task -d`.
+
+### File format of the `.sh` files
+All of the variables are set as shell scripts that are sourced.
+(It [doesn't seem](http://wiki.bash-hackers.org/howto/conffile)
+like there's a native shell configuration language or anything.)
