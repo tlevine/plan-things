@@ -1,4 +1,5 @@
 task_print() {
+  echo '--------'
   echo "$MESSAGE"
   echo
   echo "($DAYS days)"
