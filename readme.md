@@ -123,3 +123,9 @@ And here's a task file.
     MESSAGE=$(cat<<EOF
     Set up the tests to run in multiple shells.
     EOF)
+
+## Development
+Run tests with urchin.
+
+    npm install -g urchin
+    urchin ./test

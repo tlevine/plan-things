@@ -1,0 +1,10 @@
+. ../../plan
+DAYS=0.25
+MESSAGE=abc
+
+expected='abc
+
+(0.25 days)
+'
+
+test $(task_print) -eq "$expected"
