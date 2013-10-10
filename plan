@@ -110,8 +110,7 @@ plan edit: Edit the description of a story or task
            and the estimated duration of a task.
 "
 
-# If you ran plan (rather than sourcing it).
-if test -z "$PS1" ; then
+if false; then
   case $(input_command $1) in
     other) echo "$USAGE" && exit 1 ;;
     help)  echo "$USAGE" ;;

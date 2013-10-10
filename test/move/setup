@@ -2,6 +2,6 @@
 set -e
 
 mkdir -p .plan/{proposed,current,passed,done}
-mkdir .plan/proposed/{plan_things,save_the_world}
+mkdir -p .plan/proposed/{plan_things,save_the_world}
 touch .plan/proposed/{plan_things,save_the_world}/thing
 touch .plan/proposed/{plan_things,save_the_world}/lala

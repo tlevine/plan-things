@@ -1,1 +1,1 @@
-rm -R .plan
+rm -Rf .plan
