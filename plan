@@ -1,3 +1,6 @@
+#!/bin/sh
+set -e
+
 task_print() {
   echo '--------'
   echo "$MESSAGE"
@@ -50,6 +53,19 @@ input_command() {
   else
     echo other
   fi
+}
+
+thing_find() {
+  plan_dir="$1"
+  thing_name="$2"
+
+  for group in proposed current passed done; do
+    if test -e "$plan_dir/$group/$thing_name"; then
+      echo "$plan_dir/$group/$thing_name"
+      return
+    fi
+  done
+  return 1
 }
 
 USAGE="
