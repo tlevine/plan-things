@@ -13,5 +13,5 @@ thing_print() {
 }
 
 thing_total_days() {
-  echo 0.2
+  grep -r -m1 '^DAYS=' "$1" | cut -d= -f2
 }
