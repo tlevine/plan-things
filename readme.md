@@ -106,3 +106,18 @@ when all of the tasks have been marked "done", with
 All of the variables are set as shell scripts that are sourced.
 (It [doesn't seem](http://wiki.bash-hackers.org/howto/conffile)
 like there's a native shell configuration language or anything.)
+
+Here's an example thing file.
+
+    MESSAGE=$(cat<<EOF
+    As someone who runs plan-things on barebones computers,
+    I want plan-things to work with POSIX-compliant shell rather
+    than just BASH so that I can use plan-things on all my computers.
+    EOF)
+
+And here's a task file.
+
+    DAYS=0.25
+    MESSAGE=$(cat<<EOF
+    Set up the tests to run in multiple shells.
+    EOF)
