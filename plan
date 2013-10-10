@@ -25,3 +25,13 @@ thing_edit_interactive() {
 EOF)' > "$thing_file"
   "$EDITOR" "$thing_file"
 }
+
+# task_edit_interactive ~/.plans/proposed/cardboard_comma/buy_glue.sh
+task_edit_interactive() {
+  task_file="$1"
+  echo 'DAYS=
+MESSAGE=$(cat<<EOF
+
+EOF)' > "$task_file"
+  "$EDITOR" "$task_file"
+}
