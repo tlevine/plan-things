@@ -1,5 +1,7 @@
 Plan Things
 =====
+Like notecards-on-a-table, but portable, digitized, scriptable
+and in a git repository
 
     $ plan -h
 
