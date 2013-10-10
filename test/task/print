@@ -2,7 +2,9 @@
 DAYS=0.25
 MESSAGE=abc
 
-expected='abc
+expected='
+--------
+abc
 
 (0.25 days)'
 
