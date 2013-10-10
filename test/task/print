@@ -7,4 +7,4 @@ expected='abc
 (0.25 days)
 '
 
-test $(task_print) -eq "$expected"
+test $(task_print) = "$expected"
