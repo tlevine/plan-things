@@ -52,11 +52,15 @@ input_command() {
   fi
 }
 
-
-
-
+USAGE="$0 blah blah"
 
 # If you ran plan (rather than sourcing it).
 if test -z "$PS1" ; then
-  input_command $1
+  case $(input_command $1) in
+    other) echo "$USAGE" && exit 1 ;;
+    help)  echo "$USAGE" ;;
+    edit)  echo edit  ;;
+    move)  echo move  ;;
+    show)  echo show  ;;
+  esac
 fi
