@@ -1,0 +1,6 @@
+#!/bin/sh
+set -e
+. ../../plan
+
+export PLAN_DIR=.plan
+thing_move save_the_world current
