@@ -18,14 +18,22 @@ Plan Things
 
     COMMANDS is zero or more of the following.
 
-      -h, --help)       Show this help.
+      Commands that set other properties
+
       -m, --message)    Description/story of the thing or task
       -t, --time)       Estimate of how long it's going to take
+
+      Commands that move things
+
       -c, --current)    Put a story (not a task) on the metaphorical
                         board; move it to the "current" group.
       -p, --pass)       Decide not to do the story (not task);
                         move it to the "passed" group.
       -d, --done)       Mark a task (not a story) as done.
+
+      Commands that do other things
+
+      -h, --help)       Show this help.
 
     For example,
 
