@@ -1,2 +1,5 @@
 . ../../plan
-test $(input_command plan edit) = edit
+set -e
+
+test $(input_command edit foobar) = edit
+test $(input_command edit) = edit

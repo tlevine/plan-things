@@ -38,5 +38,14 @@ EOF)' > "$task_file"
 
 # Is it "show","move","edit","help" or something else?
 input_command() {
-  echo h
+  valid=' show
+          move
+          edit
+          help
+  '
+  if echo "$valid" | grep " $1$" > /dev/null; then
+    echo "$1"
+  else
+    echo other
+  fi
 }
