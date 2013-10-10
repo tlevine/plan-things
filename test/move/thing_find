@@ -3,4 +3,5 @@ set -e
 . ../../plan
 
 export PLAN_DIR=.plan
-! thing_find not_a_thing current
+test $(thing_find save_the_world) = proposed
+! thing_find not_a_thing
