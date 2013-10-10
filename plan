@@ -35,3 +35,8 @@ MESSAGE=$(cat<<EOF
 EOF)' > "$task_file"
   "$EDITOR" "$task_file"
 }
+
+# Is it "show","move","edit","help" or something else?
+input_command() {
+  echo h
+}

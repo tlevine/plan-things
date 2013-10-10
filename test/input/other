@@ -1,0 +1,4 @@
+. ../../plan
+set -e
+test $(input_command plan) = other
+test $(input_command plan aoeuaoe) = other
