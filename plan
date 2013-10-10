@@ -13,5 +13,6 @@ thing_print() {
 }
 
 thing_total_days() {
-  grep -r -m1 '^DAYS=' "$1" | cut -d= -f2
+  expression=$(grep -r -m1 '^DAYS=' "$1" | cut -d= -f2 | tr '\n' + | sed 's/+$//')
+  echo $expression | bc
 }
