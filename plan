@@ -1,6 +1,8 @@
 #!/bin/sh
 set -e
 
+PLAN_DIR=~/.plan
+
 task_print() {
   echo '--------'
   echo "$MESSAGE"
@@ -56,16 +58,26 @@ input_command() {
 }
 
 thing_find() {
-  plan_dir="$1"
-  thing_name="$2"
+  thing_name="$1"
 
   for group in proposed current passed done; do
-    if test -e "$plan_dir/$group/$thing_name"; then
-      echo "$plan_dir/$group/$thing_name"
-      return
+    if test -e "$PLAN_DIR/$group/$thing_name"; then
+      echo "$group"
+      return 0
     fi
   done
   return 1
+}
+
+thing_move() {
+  thing="$1"
+  old_group="$2"
+
+  if new_group=$(thing_find "$thing" "$group"); then
+    echo git mv "$PLAN_DIR/$old_group/$thing" "$PLAN_DIR/$new_group"
+  else
+    return 1
+  fi
 }
 
 USAGE="
