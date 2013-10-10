@@ -46,3 +46,27 @@ Plan Things
     to fill in the various fields interactively.
 
 ## Structure of the `~/.plans` directory
+The plans directory is structured like so.
+
+    ~/.plans/
+      .gitignore
+      .cache
+      proposed/
+        plan_trip/
+          thing.yml
+          book_flight.yml
+          call_bob.yml
+        ...
+      current/
+        make_a_cardboard_comma/
+          thing.yml
+          buy_glue.yml
+          find_cardboard.yml
+        ...
+      passed/
+        ...
+      done/
+        ...
+
+Now I explain that structure in more precision.
+The `~/.plans` directory contais four directories
