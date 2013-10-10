@@ -1,7 +1,9 @@
 #!/bin/sh
 set -e
 
-PLAN_DIR=~/.plan
+if test -z "$PLAN_DIR"; then
+  PLAN_DIR=~/.plan
+fi
 
 task_print() {
   echo '--------'
