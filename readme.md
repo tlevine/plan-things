@@ -23,11 +23,6 @@ and in a git repository
 
     COMMANDS is zero or more of the following.
 
-      Commands that set other properties
-
-      -m, --message)    Description/story of the thing or task
-      -t, --time)       Estimate of how long it's going to take
-
       Commands that move things
 
       -b, --back)       Put a story (not a task) back in the
@@ -43,13 +38,14 @@ and in a git repository
       Commands that do other things
 
       -h, --help)       Show this help.
+      -e, --edit)       Edit the description of a story or task and
+                        the estimated duration of a task.
 
     For example,
 
         plan edit plan_trip email_bob -m 'Ask Bob about the thing.'
 
-    If you specify no commands, you will be prompted
-    to fill in the various fields interactively.
+    If you specify no commands, it will be as if you ran `--edit`.
 
 ## Structure of the `~/.plans` directory
 The plans directory is structured like so.
