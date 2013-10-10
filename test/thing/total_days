@@ -1,0 +1,6 @@
+. ../../plan
+
+if ! test $(thing_total_days .example-thing) = 0.4; then
+  thing_total_days .example-thing
+  exit 1
+fi

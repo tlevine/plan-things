@@ -11,3 +11,7 @@ thing_print() {
   echo
   echo "($DAYS days)"
 }
+
+thing_total_days() {
+  echo 0.2
+}
