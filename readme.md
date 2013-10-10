@@ -3,6 +3,9 @@ Plan Things
 
     $ plan -h
 
+    Plan things, in a kind-of-xtreme way. Plans get saved in the
+    ~/.plans directory, which you can version nicely in git.
+
     USAGE: plan show GROUP
            plan edit [thing id] [[task id]] COMMANDS
 
@@ -41,3 +44,5 @@ Plan Things
 
     If you specify no commands, you will be prompted
     to fill in the various fields interactively.
+
+## Structure of the `~/.plans` directory
