@@ -16,3 +16,12 @@ thing_total_days() {
   expression=$(grep -r -m1 '^DAYS=' "$1" | cut -d= -f2 | tr '\n' + | sed 's/+$//')
   echo $expression | bc
 }
+
+# thing_edit_interactive ~/.plans/proposed/cardboard_comma/thing.sh
+thing_edit_interactive() {
+  thing_file="$1"
+  echo 'MESSAGE=$(cat<<EOF
+
+EOF)' > "$thing_file"
+  "$EDITOR" "$thing_file"
+}
