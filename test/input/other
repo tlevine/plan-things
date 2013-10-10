@@ -1,5 +1,5 @@
 . ../../plan
 set -e
 
-test $(input_command plan) = other
-test $(input_command plan aoeuaoe) = other
+test $(input_command) = other
+test $(input_command aoeuaoe) = other

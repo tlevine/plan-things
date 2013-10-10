@@ -43,9 +43,20 @@ input_command() {
           edit
           help
   '
-  if echo "$valid" | grep " $1$" > /dev/null; then
+  if test -z "$1"; then
+    echo other
+  elif echo "$valid" | grep " $1$" > /dev/null; then
     echo "$1"
   else
     echo other
   fi
 }
+
+
+
+
+
+# If you ran plan (rather than sourcing it).
+if test -z "$PS1" ; then
+  input_command $1
+fi
