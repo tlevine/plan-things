@@ -3,49 +3,33 @@ Plan Things
 Like notecards-on-a-table, but portable, digitized, scriptable
 and in a git repository
 
-    $ plan -h
+    $ plan help
 
     Plan things, in a kind-of-xtreme way. Plans get saved in the
     ~/.plans directory, which you can version nicely in git.
 
     USAGE: plan show GROUP
-           plan edit [thing id] [[task id]] COMMANDS
+           plan move [thing id] GROUP
+           plan edit [thing id] [[task id]]
+           plan help
 
     GROUP is one of the following.
 
-      all
       proposed
       current
       passed
       done
 
-    If you specify no GROUP, GROUP default to "current".
+    plan show: List the things and tasks in a group.
+      In addition to the four groups above, you can
+      specify "all", which will list all the things.
 
-    COMMANDS is zero or more of the following.
+    plan move: Move a thing to a different group.
 
-      Commands that move things
+    plan help: Show this help.
 
-      -b, --back)       Put a story (not a task) back in the
-                        "proposed" group.
-      -c, --current)    Put a story (not a task) on the metaphorical
-                        board; move it to the "current" group.
-      -p, --pass)       Decide not to do the story (not task);
-                        move it to the "passed" group.
-      -d, --done)       Mark a task (not a story) as done.
-                        You can only do this if the story is
-                        in the "current" group.
-
-      Commands that do other things
-
-      -h, --help)       Show this help.
-      -e, --edit)       Edit the description of a story or task and
-                        the estimated duration of a task.
-
-    For example,
-
-        plan edit plan_trip email_bob -m 'Ask Bob about the thing.'
-
-    If you specify no commands, it will be as if you ran `--edit`.
+    plan edit: Edit the description of a story or task
+               and the estimated duration of a task.
 
 ## Structure of the `~/.plans` directory
 The plans directory is structured like so.
