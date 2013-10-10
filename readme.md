@@ -28,11 +28,15 @@ Plan Things
 
       Commands that move things
 
+      -b, --back)       Put a story (not a task) back in the
+                        "proposed" group.
       -c, --current)    Put a story (not a task) on the metaphorical
                         board; move it to the "current" group.
       -p, --pass)       Decide not to do the story (not task);
                         move it to the "passed" group.
       -d, --done)       Mark a task (not a story) as done.
+                        You can only do this if the story is
+                        in the "current" group.
 
       Commands that do other things
 
@@ -69,4 +73,31 @@ The plans directory is structured like so.
         ...
 
 Now I explain that structure in more precision.
-The `~/.plans` directory contais four directories
+
+### Root level
+The `~/.plans` directory contais four directories,
+called `proposed`, `current`, `passed`, and `done`.
+These directories are called *groups*, and each group
+ctories contains a bunch of *things*.
+
+The `~/.plans` directory contais two other files,
+`.gitignore` and `.cache`. `.gitignore` just says
+`.cache\n`, and `.cache` is a cache file.
+
+### Things
+Each thing directory contains a file called `thing.yml`.
+This file has most of the thing-specific information.
+All of the other files are tasks, named `${task_name}.yml`,
+and they contain the task-specific information.
+
+The one piece of information that is not encoded in the
+thing directory is the group of which the thing is a part.
+This information is instead encoded as the group directory
+in which the thing directory is located.
+
+Newly created things start in the `proposed` directory.
+Running `plan edit thing -[bcp]` moves them between
+directories. They can only be moved to the "done"
+directory/group from the "current" group, and this happens
+when all of the tasks have been marked "done", with
+`plan edit thing task -d`.
