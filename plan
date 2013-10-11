@@ -103,8 +103,32 @@ cmd_edit() {
   if test -z "$task"; then
     thing_edit "${PLAN_DIR}/${group}/${thing}/thing.sh"
   else
+    if ! test -e "${PLAN_DIR}/${group}/${thing}/"; then
+      mkdir -p "${PLAN_DIR}/${group}/${thing}"
+      touch "${PLAN_DIR}/${group}/${thing}/thing"
+    fi
     task_edit "${PLAN_DIR}/${group}/${thing}/${task}.sh"
   fi
+}
+
+cmd_show() {
+  group="$1"
+  if test "$group" = all; then
+    groups='proposed current passed done'
+  else
+    groups="$group"
+  fi
+
+  for group in $groups; do
+    mkdir -p "$PLAN_DIR/$group"
+    for thing in $(ls "$PLAN_DIR/$group"); do
+      (
+        . "${PLAN_DIR}/${group}/${thing}/thing"
+        DAYS=$(thing_total_days "${PLAN_DIR}/${group}/${thing}")
+        thing_print
+      )
+    done
+  done
 }
 
 USAGE="
@@ -141,6 +165,6 @@ if true; then
     help)  echo "$USAGE" ;;
     edit)  cmd_edit "$2" "$3" ;;
     move)  thing_move "$2" "$3" ;;
-    show)  echo show  ;;
+    show)  cmd_show "$2" ;;
   esac
 fi
