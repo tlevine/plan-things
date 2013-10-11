@@ -1,6 +1,7 @@
 _plan()
 {
   local command=${COMP_WORDS[1]}
+  echo $command
   local one=${COMP_WORDS[2]}
   local two=${COMP_WORDS[3]}
 
