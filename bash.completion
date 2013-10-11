@@ -1,0 +1,14 @@
+_plan()
+{
+  local command=${COMP_WORDS[1]}
+  local one=${COMP_WORDS[2]}
+  local two=${COMP_WORDS[3]}
+
+  case "$command" in
+    edit)  COMPREPLY=( $(compgen -W $(ls ~/.plan/"$one") -- "$one")) ;;
+    move)  COMPREPLY=( $(compgen -W $(ls ~/.plan/"$one") -- "$one")) ;;
+    show)  COMPREPLY=( $(compgen -W "all proposed current passed done" -- "$one")) ;;
+    *)     COMPREPLY=( $(compgen -W "show edit move help" -- $cur) ) ;;
+  esac
+}
+complete -F _plan plan
