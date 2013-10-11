@@ -29,7 +29,8 @@ thing_edit() {
   thing_file="$1"
   echo 'MESSAGE=$(cat<<EOF
 
-EOF)' > "$thing_file"
+EOF
+)' > "$thing_file"
   "$EDITOR" "$thing_file"
 }
 
@@ -39,7 +40,8 @@ task_edit() {
   echo 'DAYS=
 MESSAGE=$(cat<<EOF
 
-EOF)' > "$task_file"
+EOF
+)' > "$task_file"
   "$EDITOR" "$task_file"
 }
 
