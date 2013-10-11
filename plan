@@ -73,9 +73,9 @@ thing_find() {
 
 thing_move() {
   thing="$1"
-  old_group="$2"
+  new_group="$2"
 
-  if new_group=$(thing_find "$thing" "$group"); then
+  if old_group=$(thing_find "$thing" "$group"); then
     echo git mv "$PLAN_DIR/$old_group/$thing" "$PLAN_DIR/$new_group"
   else
     return 1
@@ -131,7 +131,7 @@ if true; then
     other) echo "$USAGE" && exit 1 ;;
     help)  echo "$USAGE" ;;
     edit)  cmd_edit "$2" "$3" ;;
-    move)  echo move  ;;
+    move)  thing_move "$2" "$3" ;;
     show)  echo show  ;;
   esac
 fi
