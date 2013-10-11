@@ -1,7 +1,6 @@
 _plan()
 {
   local command=${COMP_WORDS[1]}
-  echo $command
   local one=${COMP_WORDS[2]}
   local two=${COMP_WORDS[3]}
 
@@ -9,7 +8,7 @@ _plan()
     edit)  COMPREPLY=( $(compgen -W $(ls ~/.plan/"$one") -- "$one")) ;;
     move)  COMPREPLY=( $(compgen -W $(ls ~/.plan/"$one") -- "$one")) ;;
     show)  COMPREPLY=( $(compgen -W "all proposed current passed done" -- "$one")) ;;
-    *)     COMPREPLY=( $(compgen -W "show edit move help" -- $cur) ) ;;
+    *)     COMPREPLY=( $(compgen -W "show edit move help" -- "$command") ) ;;
   esac
 }
 complete -F _plan plan
