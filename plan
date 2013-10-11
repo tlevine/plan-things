@@ -24,8 +24,8 @@ thing_total_days() {
   echo $expression | bc
 }
 
-# thing_edit_interactive ~/.plans/proposed/cardboard_comma/thing.sh
-thing_edit_interactive() {
+# thing_edit ~/.plans/proposed/cardboard_comma/thing.sh
+thing_edit() {
   thing_file="$1"
   echo 'MESSAGE=$(cat<<EOF
 
@@ -33,8 +33,8 @@ EOF)' > "$thing_file"
   "$EDITOR" "$thing_file"
 }
 
-# task_edit_interactive ~/.plans/proposed/cardboard_comma/buy_glue.sh
-task_edit_interactive() {
+# task_edit ~/.plans/proposed/cardboard_comma/buy_glue.sh
+task_edit() {
   task_file="$1"
   echo 'DAYS=
 MESSAGE=$(cat<<EOF
@@ -82,6 +82,22 @@ thing_move() {
   fi
 }
 
+cmd_edit() {
+  thing="$1"
+  task="$2"
+
+  if ! group=$(thing_find "$thing"); then
+    group=proposed
+    mkdir -p "${PLAN_DIR}/${group}/${thing}"
+  fi
+
+  if test -z "$task"; then
+    thing_edit "${PLAN_DIR}/${group}/${thing}/thing.sh"
+  else
+    task_edit "${PLAN_DIR}/${group}/${thing}/${task}.sh"
+  fi
+}
+
 USAGE="
 Plan things, in a kind-of-xtreme way. Plans get saved in the
 ~/.plans directory, which you can version nicely in git.
@@ -110,11 +126,11 @@ plan edit: Edit the description of a story or task
            and the estimated duration of a task.
 "
 
-if false; then
+if true; then
   case $(input_command $1) in
     other) echo "$USAGE" && exit 1 ;;
     help)  echo "$USAGE" ;;
-    edit)  echo edit  ;;
+    edit)  cmd_edit "$2" "$3" ;;
     move)  echo move  ;;
     show)  echo show  ;;
   esac
