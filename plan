@@ -75,6 +75,15 @@ thing_move() {
   thing="$1"
   new_group="$2"
 
+  valid=' current
+          proposed
+          passed
+         '
+  if ! echo "$valid" | grep " $new_group$"; then
+    echo 'You may only move to the groups "current", "proposed", and "passed".'
+    return 2
+  fi
+
   if old_group=$(thing_find "$thing" "$group"); then
     echo git mv "$PLAN_DIR/$old_group/$thing" "$PLAN_DIR/$new_group"
   else
