@@ -1,3 +1,29 @@
+# Travel upwards until finding a git directory.
+# _plan_dir [directory]
+_plan_dir() {
+  wd="$1"
+  if test -d "$wd/.git"; then
+    echo "$wd/.plans"
+  else
+    _plan_dir "$wd/.."
+  fi
+}
+
+# Find all of the things in a group.
+_plan_things() {
+  group=$1
+  plan_dir=$(_plan_dir "$PWD")
+  ls "$plan_dir/$group"
+}
+
+# Find all of the tasks in a thing
+_plan_things() {
+  group=$1
+  thing="$2"
+  plan_dir=$(_plan_dir "$PWD")
+  ls "$plan_dir/$group/$thing" | grep -v index.md
+}
+
 _plan()
 {
   local command=${COMP_WORDS[1]}
