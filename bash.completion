@@ -4,25 +4,28 @@ _plan_dir() {
   wd="$1"
   if test -d "$wd/.git"; then
     echo "$wd/.plans"
+  elif test -e "$wd" = /; then
+    # echo "It doesn't look like you're in a git repository."
+    return 1
   else
-    _plan_dir "$wd/.."
+    _plan_dir $(realpath "$wd/..")
   fi
 }
 
 # Find all of the things in a group.
 _plan_things() {
   group=$1
-  plan_dir=$(_plan_dir "$PWD")
-  ls "$plan_dir/$group"
+  plan_dir=$(_plan_dir "$PWD") &&
+    test -d "$plan_dir" && ls "$plan_dir/$group"
 }
 
 # Find all of the tasks in a thing
 _plan_tasks() {
   group=$1
   thing="$2"
-  plan_dir=$(_plan_dir "$PWD")
-  ls "$plan_dir/$group/$thing" |
-    grep -v '^index.md$'
+  plan_dir=$(_plan_dir "$PWD") &&
+    ls "$plan_dir/$group/$thing" |
+      grep -v '^index.md$'
 }
 
 # Completion for the "edit" command
@@ -57,6 +60,22 @@ _plan_move() {
   done
 }
 
+_plan_command() {
+  command="$1"
+  commands='
+thing
+group
+edit
+move
+help
+'
+  if echo "$commands" | grep "^$command$" > /dev/null; then
+    sleep 0
+  else
+    compgen -W "thing group edit move help" -- "$command"
+  fi
+}
+
 _plan() {
   local command=${COMP_WORDS[1]}
   local one=${COMP_WORDS[2]}
@@ -65,9 +84,9 @@ _plan() {
   case "$command" in
     edit)  COMPREPLY=( $(_plan_edit "$one" "$two") ) ;;
     move)  COMPREPLY=( $(_plan_move "$one" "$two") ) ;;
-    group) COMPREPLY=( $(compgen -W "all proposed current passed done" -- "$one")) ) ;;
-    thing) COMPREPLY=( $(_plan_show_thing "$one")
-    *)     COMPREPLY=( $(compgen -W "thing group edit move help" -- "$command") ) ) ;;
+    group) COMPREPLY=( $(compgen -W "all proposed current passed done" -- "$one") ) ;;
+    thing) COMPREPLY=( $(_plan_show_thing "$one") ) ;;
+    *)     COMPREPLY=( $(_plan_command "$command") ) ;;
   esac
 }
 complete -F _plan plan
