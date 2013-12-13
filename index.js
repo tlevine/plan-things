@@ -113,7 +113,7 @@ commands.edit = function(_) {
     if (group === null) {
       group = 'proposed'
     }
-    var thing_dir = path.join(PLANS_DIR, group, thing_id, task_id)
+    var thing_dir = path.join(PLANS_DIR, group, thing_id)
     var task_file = path.join(thing_dir, task_id)
     mkdirp.sync(thing_dir)
   //console.log('Edit this file:',task_file)
