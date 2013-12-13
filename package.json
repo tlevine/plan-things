@@ -13,9 +13,13 @@
     "type": "git",
     "url": "git://github.com/tlevine/plan-things.git"
   },
-  "author": "",
+  "author": "Thomas Levine <_@thomaslevine.com>",
   "license": "AGPL",
   "bugs": {
     "url": "https://github.com/tlevine/plan-things/issues"
-  }
+  },
+  "dependencies": {
+    "optimist": "~0.6.0"
+  },
+  "devDependencies": {}
 }

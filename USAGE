@@ -1,0 +1,25 @@
+Plan things, in a kind-of-xtreme way. Plans get saved in the
+~/.plans directory, which you can version nicely in git.
+
+USAGE: $0 show GROUP
+       $0 move [thing id] GROUP
+       $0 edit [thing id] [[task id]]
+       $0 help
+
+GROUP is one of the following.
+
+  proposed
+  current
+  passed
+  done
+
+plan show: List the things and tasks in a group.
+  In addition to the four groups above, you can
+  specify "all", which will list all the things.
+
+plan move: Move a thing to a different group.
+
+plan help: Show this help.
+
+plan edit: Edit the description of a story or task
+           and the estimated duration of a task.
