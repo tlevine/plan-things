@@ -2,6 +2,8 @@ var fs = require('fs')
 var path = require('path')
 var argv = require('optimist').argv
 
+var move = fs.renameSync // Switch this for git
+
 var PLANS_DIR = path.join(process.env.HOME, '.plans')
 var GROUPS = {
   "proposed":null,
@@ -51,7 +53,13 @@ commands.move = function(_) {
   } else {
     var thing_id = _[1]
     var new_group = _[2]
+
     var old_group = find_group(thing_id)
+
+    var old_thing = path.join(PLANS_DIR, old_group, thing_id)
+    var new_thing = path.join(PLANS_DIR, new_group, thing_id)
+
+    move(old_thing, new_thing)
   }
 }
 
@@ -66,8 +74,9 @@ commands.edit = function(_) {
     var thing_id = _[1]
     var task_id = _.length === 3 ?_[2] : "index"
     var group = find_group(thing_id)
-
-
+    if (group === null) {
+      group = 'proposed'
+    }
     var task_file = path.join(PLANS_DIR, group, thing_id, task_id)
     console.log('Edit this file:',task_file)
     process.exit(0)
@@ -82,7 +91,7 @@ commands.help = function(_) {
 
 function find_group(thing_id) {
   var in_groups = GROUPS_LIST.map(thing_in_group).filter(identity0)
-  var group = in_groups.length === 0 ? 'proposed' : in_groups[0][0]
+  var group = in_groups.length === 0 ? null : in_groups[0][0]
   return group
 
   function identity0(x) { return x[0] }
