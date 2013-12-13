@@ -2,7 +2,7 @@ var fs = require('fs')
 var path = require('path')
 var argv = require('optimist').argv
 
-var move = fs.renameSync // Switch this for git
+var mv = fs.renameSync // Switch this for git
 
 var PLANS_DIR = path.join(process.env.HOME, '.plans')
 var GROUPS = {
@@ -59,7 +59,7 @@ commands.move = function(_) {
     var old_thing = path.join(PLANS_DIR, old_group, thing_id)
     var new_thing = path.join(PLANS_DIR, new_group, thing_id)
 
-    move(old_thing, new_thing)
+    mv(old_thing, new_thing)
   }
 }
 
