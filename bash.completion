@@ -59,7 +59,7 @@ _plan_move() {
   new_group="$2"
   for old_group in proposed current passed done; do
     if test -z "$new_group"; then
-      _plan_things $old_group | grep "^$thing"
+      compgen -W $(_plan_things $old_group) -- "^$thing"
     else
       compgen -W "all proposed current passed done" -- "$new_group"
     fi
