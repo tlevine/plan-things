@@ -1,5 +1,0 @@
-. ../../plan
-set -e
-
-test $(input_command) = other
-test $(input_command aoeuaoe) = other

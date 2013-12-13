@@ -1,7 +1,0 @@
-#!/bin/sh
-set -e
-. ../../plan
-
-export PLAN_DIR=.plan
-test $(thing_find save_the_world) = proposed
-! thing_find not_a_thing

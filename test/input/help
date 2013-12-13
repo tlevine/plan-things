@@ -1,4 +1,0 @@
-. ../../plan
-set -e
-
-test $(input_command help oeu) = help

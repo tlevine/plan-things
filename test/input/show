@@ -1,6 +1,0 @@
-. ../../plan
-set -e
-
-test $(input_command show proposed) = show
-test $(input_command show) = show
-test $(input_command show oeu) = show

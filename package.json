@@ -1,0 +1,21 @@
+{
+  "name": "plan-things",
+  "version": "0.0.0",
+  "description": "Like notecards-on-a-table, but portable, digitized, scriptable and in a git repository",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/tlevine/plan-things.git"
+  },
+  "author": "",
+  "license": "AGPL",
+  "bugs": {
+    "url": "https://github.com/tlevine/plan-things/issues"
+  }
+}

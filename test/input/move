@@ -1,5 +1,0 @@
-. ../../plan
-set -e
-
-test $(input_command move aoeu current) = move
-test $(input_command move aoeucurrent) = move
