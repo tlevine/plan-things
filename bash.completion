@@ -16,7 +16,7 @@ _plan_dir() {
 _plan_things() {
   group=$1
   plan_dir=$(_plan_dir "$PWD") &&
-    test -d "$plan_dir" && ls "$plan_dir/$group"
+    test -d "$plan_dir/$group" && ls "$plan_dir/$group"
 }
 
 # Find all of the tasks in a thing
@@ -32,19 +32,25 @@ _plan_tasks() {
 _plan_edit() {
   thing="$1"
   task="$2"
+  plan_dir=$(_plan_dir .)
   for group in proposed current passed done; do
-    if test -z "$task"; then
-      _plan_things $group | grep "^$thing"
-    else
-      _plan_tasks $group "$thing" | grep "^$task"
+    if test -d "$plan_dir/$group"; then
+      if test -z "$task"; then
+        _plan_things $group | grep "^$thing"
+      else
+        _plan_tasks $group "$thing" | grep "^$task"
+      fi
     fi
   done
 }
 
 _plan_show_thing() {
   thing="$1"
+  plan_dir=$(_plan_dir .)
   for group in proposed current passed done; do
-    _plan_things $group | grep "^$thing"
+    if test -d "$plan_dir/$group"; then
+      _plan_things $group | grep "^$thing"
+    fi
   done
 }
 
