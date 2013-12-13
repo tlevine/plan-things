@@ -19,6 +19,7 @@ var fs = require('fs')
 var path = require('path')
 var argv = require('optimist').argv
 var mkdirp = require('mkdirp')
+var spawn = require('child_process').spawn
 
 function get_plan_dir(wd) {
   if (fs.existsSync(path.join(wd, '.git'))) {
@@ -115,8 +116,12 @@ commands.edit = function(_) {
     var thing_dir = path.join(PLANS_DIR, group, thing_id, task_id)
     var task_file = path.join(thing_dir, task_id)
     mkdirp.sync(thing_dir)
-    console.log('Edit this file:',task_file)
-    process.exit(0)
+  //console.log('Edit this file:',task_file)
+    var child = require('child_process').spawn('vim', [task_file], {stdio:'inherit'}) 
+    child.on('exit', after_editing)
+    function after_editing(e, code) {
+      process.exit(0)
+    }
   }
 }
 
