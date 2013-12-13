@@ -117,10 +117,13 @@ commands.edit = function(_) {
     var task_file = path.join(thing_dir, task_id)
     mkdirp.sync(thing_dir)
   //console.log('Edit this file:',task_file)
-    var child = require('child_process').spawn('vim', [task_file], {stdio:'inherit'}) 
+    var child = edit()
     child.on('exit', after_editing)
     function after_editing(e, code) {
       process.exit(0)
+    }
+    function edit(filename) {
+      return spawn(EDITOR, [task_file], {stdio:'inherit'}) 
     }
   }
 }
