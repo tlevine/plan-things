@@ -17,24 +17,57 @@ _plan_things() {
 }
 
 # Find all of the tasks in a thing
-_plan_things() {
+_plan_tasks() {
   group=$1
   thing="$2"
   plan_dir=$(_plan_dir "$PWD")
-  ls "$plan_dir/$group/$thing" | grep -v index.md
+  ls "$plan_dir/$group/$thing" |
+    grep -v '^index.md$'
 }
 
-_plan()
-{
+# Completion for the "edit" command
+_plan_edit() {
+  thing="$1"
+  task="$2"
+  for group in proposed current passed done; do
+    if test -z "$task"; then
+      _plan_things $group | grep "^$thing"
+    else
+      _plan_tasks $group "$thing" | grep "^$task"
+    fi
+  done
+}
+
+_plan_show_thing() {
+  thing="$1"
+  for group in proposed current passed done; do
+    _plan_things $group | grep "^$thing"
+  done
+}
+
+_plan_move() {
+  thing="$1"
+  new_group="$2"
+  for old_group in proposed current passed done; do
+    if test -z "$new_group"; then
+      _plan_things $old_group | grep "^$thing"
+    else
+      compgen -W "all proposed current passed done" -- "$new_group"
+    fi
+  done
+}
+
+_plan() {
   local command=${COMP_WORDS[1]}
   local one=${COMP_WORDS[2]}
   local two=${COMP_WORDS[3]}
 
   case "$command" in
-    edit)  COMPREPLY=( $(compgen -W $(ls ~/.plan/"$one") -- "$one")) ;;
-    move)  COMPREPLY=( $(compgen -W $(ls ~/.plan/"$one") -- "$one")) ;;
-    show)  COMPREPLY=( $(compgen -W "all proposed current passed done" -- "$one")) ;;
-    *)     COMPREPLY=( $(compgen -W "show edit move help" -- "$command") ) ;;
+    edit)  COMPREPLY=( $(_plan_edit "$one" "$two") ) ;;
+    move)  COMPREPLY=( $(_plan_move "$one" "$two") ) ;;
+    group) COMPREPLY=( $(compgen -W "all proposed current passed done" -- "$one")) ) ;;
+    thing) COMPREPLY=( $(_plan_show_thing "$one")
+    *)     COMPREPLY=( $(compgen -W "thing group edit move help" -- "$command") ) ) ;;
   esac
 }
 complete -F _plan plan

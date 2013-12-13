@@ -1,7 +1,8 @@
 Plan things, in a kind-of-xtreme way. Plans get saved in the
 ~/.plans directory, which you can version nicely in git.
 
-USAGE: $0 show GROUP
+USAGE: $0 group GROUP
+       $0 thing [thing id]
        $0 move [thing id] GROUP
        $0 edit [thing id] [[task id]]
        $0 help
