@@ -50,7 +50,8 @@ commands.move = function(_) {
     process.exit(3)
   } else {
     var thing_id = _[1]
-    var group = _[2]
+    var new_group = _[2]
+    var old_group = find_group(thing_id)
   }
 }
 
@@ -64,22 +65,30 @@ commands.edit = function(_) {
   } else {
     var thing_id = _[1]
     var task_id = _.length === 3 ?_[2] : "index"
-    var in_groups = GROUPS_LIST.map(thing_in_group).filter(identity0)
-    var group = in_groups.length === 0 ? 'proposed' : in_groups[0][0]
+    var group = find_group(thing_id)
+
+
     var task_file = path.join(PLANS_DIR, group, thing_id, task_id)
     console.log('Edit this file:',task_file)
     process.exit(0)
   }
-
-  function thing_in_group(group) {
-    return [group, fs.existsSync(path.join(PLANS_DIR, group, thing_id))]
-  }
-  function identity0(x) { return x[0] }
 }
 
 commands.help = function(_) {
   console.log(fs.readFileSync('USAGE', 'utf-8'))
   process.exit(0)
+}
+
+
+function find_group(thing_id) {
+  var in_groups = GROUPS_LIST.map(thing_in_group).filter(identity0)
+  var group = in_groups.length === 0 ? 'proposed' : in_groups[0][0]
+  return group
+
+  function identity0(x) { return x[0] }
+  function thing_in_group(group) {
+    return [group, fs.existsSync(path.join(PLANS_DIR, group, thing_id))]
+  }
 }
 
 function cli() {
