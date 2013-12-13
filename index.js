@@ -57,6 +57,7 @@ commands.show = function(_) {
     for (group in GROUPS) {
       console.log(group + '\n')
       list_group(group)
+      console.log()
     }
   } else if (_.length === 2 && !(_[1] in GROUPS)) {
     console.log('"' + _[1] + '" is not a valid group.')
@@ -69,8 +70,9 @@ commands.show = function(_) {
   function list_group(group) {
     var group_dir = path.join(PLANS_DIR, group)
     if (fs.existsSync(group_dir)) {
-      for (thing_dir in fs.readdirSync(group_dir)) {
-        console.log('  ' + thing_dir)
+      var thing_dirs = fs.readdirSync(group_dir)
+      for (i in thing_dirs) {
+        console.log('  ' + thing_dirs[i])
         // Add time estimates too.
       }
     }
@@ -132,7 +134,7 @@ commands.edit = function(_) {
 }
 
 commands.help = function(_) {
-  console.log(fs.readFileSync('USAGE', 'utf-8'))
+  console.log(fs.readFileSync(path.join(__dirname, 'USAGE'), 'utf-8'))
   process.exit(0)
 }
 
