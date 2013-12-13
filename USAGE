@@ -15,7 +15,7 @@ GROUP is one of the following.
 
 plan show: List the things and tasks in a group.
   In addition to the four groups above, you can
-  specify "all", which will list all the things.
+  specify nothing, which will list all the things.
 
 plan move: Move a thing to a different group.
 

@@ -1,6 +1,8 @@
 var fs = require('fs')
+var path = require('path')
 var argv = require('optimist').argv
 
+var PLANS_DIR = path.join(process.env.HOME, '.plans')
 var GROUPS = {
   "proposed":null,
   "current":null,
@@ -10,11 +12,29 @@ var GROUPS = {
 var commands = {}
 
 commands.show = function(_) {
-  if (_.length != 2) {
-    console.log('You must specify a exactly one group.')
+  if (_.length < 1 || _.length > 2) {
+    console.log('You must specify no group or one group.')
     process.exit(2)
+  } else if (_.length === 1) {
+    for (group in GROUPS) {
+      list_group(group)
+    }
+  } else if (_.length === 2 && !(_[1] in GROUPS)) {
+    console.log('"' + _[1] + '" is not a valid group.')
+    process.exit(8)
   } else {
     var group = _[1]
+    list_group(group)
+  }
+
+  function list_group(group) {
+    var group_dir = path.join(PLANS_DIR, group)
+    if (fs.existsSync(group_dir)) {
+      console.log(group + '\n')
+      for (thing_dir in fs.readdirSync(group_dir)) {
+        console.log('  ' + thing_dir)
+      }
+    }
   }
 }
 
