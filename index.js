@@ -22,7 +22,7 @@ var mkdirp = require('mkdirp')
 
 function get_plan_dir(wd) {
   if (fs.existsSync(path.join(wd, '.git'))) {
-    return path.join(wd, '..plans')
+    return path.join(wd, '.plans')
   } else if (wd === '/') {
     console.log('Could not find a git repository')
     process.exit(9)
