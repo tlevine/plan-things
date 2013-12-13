@@ -33,6 +33,8 @@ function get_plan_dir(wd) {
 }
 var PLANS_DIR = get_plan_dir(path.resolve('.'))
 
+var EDITOR = process.env.EDITOR || 'vi'
+
 var GROUPS = {
   "proposed":null,
   "current":null,
@@ -120,6 +122,7 @@ commands.edit = function(_) {
     var child = edit()
     child.on('exit', after_editing)
     function after_editing(e, code) {
+      // Try parsing the file to make sure all is well.
       process.exit(0)
     }
     function edit(filename) {
