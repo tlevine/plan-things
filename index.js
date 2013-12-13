@@ -20,7 +20,18 @@ var path = require('path')
 var argv = require('optimist').argv
 var mkdirp = require('mkdirp')
 
-var PLANS_DIR = path.join(process.env.HOME, '.plans')
+function get_plan_dir(wd) {
+  if (fs.existsSync(path.join(wd, '.git'))) {
+    return path.join(wd, '..plans')
+  } else if (wd === '/') {
+    console.log('Could not find a git repository')
+    process.exit(9)
+  } else {
+    return get_plan_dir(path.join(wd, '..'))
+  }
+}
+var PLANS_DIR = get_plan_dir(path.resolve('.'))
+
 var GROUPS = {
   "proposed":null,
   "current":null,
