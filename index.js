@@ -116,9 +116,9 @@ commands.edit = function(_) {
       group = 'proposed'
     }
     var thing_dir = path.join(PLANS_DIR, group, thing_id)
-    var task_file = path.join(thing_dir, task_id)
+    var task_file = path.join(thing_dir, task_id + '.md')
     mkdirp.sync(thing_dir)
-  //console.log('Edit this file:',task_file)
+
     var child = edit()
     child.on('exit', after_editing)
     function after_editing(e, code) {
