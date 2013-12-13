@@ -1,6 +1,6 @@
 {
   "name": "plan-things",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Like notecards-on-a-table, but portable, digitized, scriptable and in a git repository",
   "bin": "index.js",
   "main": "index.js",
@@ -15,7 +15,7 @@
     "url": "git://github.com/tlevine/plan-things.git"
   },
   "author": "Thomas Levine <_@thomaslevine.com>",
-  "license": "AGPL",
+  "license": "AGPL 3.0",
   "bugs": {
     "url": "https://github.com/tlevine/plan-things/issues"
   },
