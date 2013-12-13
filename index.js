@@ -65,7 +65,7 @@ commands.edit = function(_) {
     var thing_id = _[1]
     var task_id = _.length === 3 ?_[2] : "index"
     var in_groups = GROUPS_LIST.map(thing_in_group).filter(identity0)
-    var group = in_groups.length === 0 ? 'proposed' : in_groups[0]
+    var group = in_groups.length === 0 ? 'proposed' : in_groups[0][0]
     var task_file = path.join(PLANS_DIR, group, thing_id, task_id)
     console.log('Edit this file:',task_file)
     process.exit(6)
