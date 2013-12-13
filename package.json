@@ -2,6 +2,7 @@
   "name": "plan-things",
   "version": "0.0.0",
   "description": "Like notecards-on-a-table, but portable, digitized, scriptable and in a git repository",
+  "bin": "index.js",
   "main": "index.js",
   "directories": {
     "test": "test"
@@ -19,6 +20,7 @@
     "url": "https://github.com/tlevine/plan-things/issues"
   },
   "dependencies": {
+    "mkdirp": "0.3.5",
     "optimist": "~0.6.0"
   },
   "devDependencies": {}
