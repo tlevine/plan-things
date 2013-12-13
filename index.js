@@ -26,6 +26,7 @@ commands.show = function(_) {
     process.exit(2)
   } else if (_.length === 1) {
     for (group in GROUPS) {
+      console.log(group + '\n')
       list_group(group)
     }
   } else if (_.length === 2 && !(_[1] in GROUPS)) {
@@ -39,7 +40,6 @@ commands.show = function(_) {
   function list_group(group) {
     var group_dir = path.join(PLANS_DIR, group)
     if (fs.existsSync(group_dir)) {
-      console.log(group + '\n')
       for (thing_dir in fs.readdirSync(group_dir)) {
         console.log('  ' + thing_dir)
         // Add time estimates too.
