@@ -1,6 +1,7 @@
 var fs = require('fs')
 var path = require('path')
 var argv = require('optimist').argv
+var mkdirp = require('mkdirp')
 
 var PLANS_DIR = path.join(process.env.HOME, '.plans')
 var GROUPS = {
@@ -54,12 +55,18 @@ commands.move = function(_) {
 
     var old_group = find_group(thing_id)
 
-    var old_thing = path.join(PLANS_DIR, old_group, thing_id)
-    var new_thing = path.join(PLANS_DIR, new_group, thing_id)
-
-    mv(old_thing, new_thing)
+    if (old_group === null) {
+      console.log('There is no thing of this name.')
+    } else {
+      var old_thing = path.join(PLANS_DIR, old_group, thing_id)
+      var new_thing = path.join(PLANS_DIR, new_group, thing_id)
+      mkdirp.sync(path.join(PLANS_DIR, new_group))
+      mv(old_thing, new_thing)
+    }
   }
-  var mv = fs.renameSync // Switch this for git
+  function mv(a,b) {
+    fs.renameSync(a,b) // Switch this for git
+  }
 }
 
 commands.edit = function(_) {
@@ -76,7 +83,9 @@ commands.edit = function(_) {
     if (group === null) {
       group = 'proposed'
     }
-    var task_file = path.join(PLANS_DIR, group, thing_id, task_id)
+    var thing_dir = path.join(PLANS_DIR, group, thing_id, task_id)
+    var task_file = path.join(thing_dir, task_id)
+    mkdirp.sync(thing_dir)
     console.log('Edit this file:',task_file)
     process.exit(0)
   }
@@ -89,11 +98,11 @@ commands.help = function(_) {
 
 
 function find_group(thing_id) {
-  var in_groups = GROUPS_LIST.map(thing_in_group).filter(identity0)
+  var in_groups = GROUPS_LIST.map(thing_in_group).filter(identity1)
   var group = in_groups.length === 0 ? null : in_groups[0][0]
   return group
 
-  function identity0(x) { return x[0] }
+  function identity1(x) { return x[1] }
   function thing_in_group(group) {
     return [group, fs.existsSync(path.join(PLANS_DIR, group, thing_id))]
   }
