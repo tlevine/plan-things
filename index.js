@@ -40,6 +40,7 @@ commands.show = function(_) {
       console.log(group + '\n')
       for (thing_dir in fs.readdirSync(group_dir)) {
         console.log('  ' + thing_dir)
+        // Add time estimates too.
       }
     }
   }
