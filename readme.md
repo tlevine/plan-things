@@ -78,31 +78,24 @@ This information is instead encoded as the group directory
 in which the thing directory is located.
 
 Newly created things start in the `proposed` directory.
-Running `plan edit thing -[bcp]` moves them between
-directories. They can only be moved to the "done"
+Running `plan move thing [group]` moves them between
+directories.
+
+There's a special caveat for moving things to the "done"
+directory. Things can only be moved to the "done"
 directory/group from the "current" group, and this happens
-when all of the tasks have been marked "done", with
-`plan edit thing task -d`.
+when all of the tasks have been marked "done" in the
+YAML section of the file.
 
-### File format of the `.sh` files
-All of the variables are set as shell scripts that are sourced.
-(It [doesn't seem](http://wiki.bash-hackers.org/howto/conffile)
-like there's a native shell configuration language or anything.)
+### File format of the files
+Thing files are just markdown.
 
-Here's an example thing file.
+Task files are markdown with a YAML header. This header contains
+just two variables  One is called `days`. This is the estimate
+of how long, in days, a particular task will take. It should be
+no more than 1. Maybe I should switch it for hours, actually.
 
-    MESSAGE=$(cat<<EOF
-    As someone who runs plan-things on barebones computers,
-    I want plan-things to work with POSIX-compliant shell rather
-    than just BASH so that I can use plan-things on all my computers.
-    EOF)
-
-And here's a task file.
-
-    DAYS=0.25
-    MESSAGE=$(cat<<EOF
-    Set up the tests to run in multiple shells.
-    EOF)
+The other is called `done`, and it is whether the task is done.
 
 ## Development
 Run tests with urchin.
